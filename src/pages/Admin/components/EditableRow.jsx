@@ -62,7 +62,6 @@ const EditableRow = ({
                     onChange={(e)=>onUpdateSelectFile(e,item._id)}
                     name="image"
                     accept="image/png , image/jpeg, image/webp"
-                   multiple
                     />
                 </label>
             </div>

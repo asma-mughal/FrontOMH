@@ -13,7 +13,7 @@ const CardDoctor = ({dot,setDot}) => {
     const {t} = useTranslation(['ABOUT']);
     const navigate= useNavigate();
     const { doctorArray, setDoctorArray,
-      getOneDoctor,singleDoc,setSingleDoc
+      getOneDoctor,setSingleDoc
      } = useContext(AuthContext)
     const docNavigation = (i)=>{
         localStorage.setItem('UniqueDocId', i)
@@ -22,25 +22,25 @@ const CardDoctor = ({dot,setDot}) => {
           const x = localStorage.getItem(("DocDataOne"));
         const res = (JSON.parse(x))
         //console.log(res)
-        setSingleDoc(res.data)
+        setSingleDoc(res?.data)
         var binary = "";
         //console.log(res.data.picture.data.data)
-      var bytes = [].slice.call(new Uint8Array(res?.data?.picture?.data?.data));
-      bytes.forEach((b) => (binary += String.fromCharCode(b)));
-      const images = localStorage.setItem(
-        "docSingleImage",
-        JSON.stringify(window.btoa(binary))
-      );
+      // // var bytes = [].slice.call(new Uint8Array(res?.data?.picture?.data?.data));
+      // // bytes.forEach((b) => (binary += String.fromCharCode(b)));
+      // // const images = localStorage.setItem(
+      // //   "docSingleImage",
+      // //   JSON.stringify(window.btoa(binary))
+      // );
         setTimeout(()=>{
         navigate("/detailDoc")
-        },[5000])
+        },[2000])
        //localStorage.setItem('Reload', true)
        }
       
        useEffect(()=>{
         const x = localStorage.getItem(("DocDataUnique"));
         const res = (JSON.parse(x))
-        const loopData = (res.data.doctor)
+        const loopData = (res?.data?.doctor)
         setDoctorArray(loopData)
         setTimeout(()=>{
           setLoading(true)
@@ -65,7 +65,7 @@ style={{
       </div>
     <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 
  lg:grid-cols-4 xl:grid-cols-4 gap-2  '>
-    {doctorArray.length==0 && <p className='font-poppins
+    {doctorArray?.length==0 && <p className='font-poppins
     mx-6 font-base font-semibold capitalize
     '>{t("No doctor Available")}.</p>}
   {loading && doctorArray?.map((i)=>{
@@ -88,14 +88,14 @@ style={{
             <h5 class="text-black font-poppins capitalize font-bold text-base  tracking-tight 
             
             dark:text-white hover:text-secondary" >
-             {i.name}</h5>
+             {i?.name}</h5>
               </button>
               <div className=' bg-sky-50'>
               <p  class="bg-secondary
                border-secondary w-36 h-10
                mx-2 my-2 font-poppins rounded border p-2
                    text-white transition hover:bg-opacity-90 hover:text-black"
-              onClick={()=>docNavigation((i._id))}
+              onClick={()=>docNavigation((i?._id))}
               >
                 
               <p className='text-center'>Doctor Profile</p>

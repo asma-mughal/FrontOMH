@@ -1,17 +1,18 @@
-import React,{Suspense, useContext, useState} from 'react'
-import { features, hospitals } from '../constants';
+import React,{ useContext, useState} from 'react'
+import { features } from '../constants';
 import { FeatureCard } from './Service';
-import {Navbar, Hero, Contact, Footer, Service, FindDoc, Bot} from './index';
+import {Navbar, Hero, Contact, Footer, Service, FindDoc} from './index';
 import { useTranslation } from 'react-i18next';
 import { Card } from './FindDoc';
 import { useNavigate  } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 import LoadingIcons from 'react-loading-icons'
+import { FloatingWhatsApp } from 'react-floating-whatsapp'
+import { avatar1, Logo1, PM } from '../assets';
 const Dashboard = ({dot, setDot,setDoc, doc}) => {
   const {t} = useTranslation(['ABOUT']);
   const navigate = useNavigate();
   const {loadHospital, tryData} = useContext(AuthContext)
-  const [data, setData] = useState();
   const [show, setShow] = useState(false);
   React.useEffect(()=>{
    loadHospital()
@@ -23,6 +24,12 @@ const Dashboard = ({dot, setDot,setDoc, doc}) => {
   return (
     <>
     <div className='bg-sky-50 '>
+    <FloatingWhatsApp 
+          phoneNumber='+4917661843993'
+          chatMessage={`Help Needed?`}
+          accountName='OmigaHealth'
+          avatar={avatar1}
+          />
         <Navbar dot={dot} setDot={setDot} />
         <div className=' bg-sky-50'>
           

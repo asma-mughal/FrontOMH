@@ -2,7 +2,7 @@ import React, { useState, Fragment, useRef } from "react";
 import { nanoid } from 'nanoid'
 import { MenuIcon, XIcon, ChevronDownIcon } from '@heroicons/react/outline';
 import { Menu, Transition } from '@headlessui/react';
-import data from "../components/mock-data.json";
+//import data from "../components/mock-data.json";
 import DocReadOnly from "../components/DocReadOnly";
 import DocEditRow from "../components/DocEditRow";
 import { useTranslation } from 'react-i18next';
@@ -10,7 +10,7 @@ import { useContext } from "react";
 import AuthContext from "../../../context/AuthContext";
 import { useEffect, useReducer } from "react";
 const Users = () => {
-  const [contacts, setContacts] = useState(data);
+  //const [contacts, setContacts] = useState(data);
   const [error,setError] = useState('');
   const [loading,setLoading] = useState(false);
   const [imageUpload, setImageUpload] = useState(null);
@@ -30,7 +30,7 @@ const [ignored, forceUpdate] = useReducer(x => x+ 1, 0);
     editDoctor, 
     deleteDoctor, onHosp,docDeptAdded, setDocDeptAdded,editDoctorImage,loadDoctor,
     tryDocData,loadHospital,
-    tryData,getOneHospital} =
+    tryData,getOneHospital, DocImage, setSelectedDocImage} =
      useContext(AuthContext);
   const [addFormData, setAddFormData] = useState({
     fullName: "",
@@ -45,10 +45,13 @@ const [ignored, forceUpdate] = useReducer(x => x+ 1, 0);
   React.useEffect(()=>{
     loadDoctor()
   },[])
+
   const deptHandle = (val, val2) =>{
+  
     setDept(val);
     setDeptName(val2)
   }
+
   const DeptDocAdded = () =>{
     return ( 
       <>
@@ -147,15 +150,15 @@ const [ignored, forceUpdate] = useReducer(x => x+ 1, 0);
   getOneHospital(val)
   const x = localStorage.getItem(("HospDataOne"));
   const res = (JSON.parse(x))
-  const loopData = (res.data.dep)
+  const loopData = (res?.data?.dep)
   setDeptArray(loopData)
   console.log(res)
-   setHospName(val2)
+  setHospName(val2)
   } 
   const uploadImage = (e) =>{
     const file = e.target.files[0];
     setImageUpload(file)
-    setImageSelected(true)
+    setSelectedDocImage(true)
 }
   const [editFormData, setEditFormData] = useState({
     name: "",
@@ -200,8 +203,8 @@ const [ignored, forceUpdate] = useReducer(x => x+ 1, 0);
     };
      addDoctor(nanoid(), newContact.name,addFormData.certificate,addFormData.experience,dept,
      hospital,imageUpload)
-    const newContacts = [...contacts, newContact];
-    setContacts(newContacts);
+    //const newContacts = [...contacts, newContact];
+    //setContacts(newContacts);
     setImageUpload(null)
     event.target.reset();
     loadDoctor()
@@ -217,17 +220,14 @@ const [ignored, forceUpdate] = useReducer(x => x+ 1, 0);
       experience:editFormData.experiance,
       picture:imageUpload? imageUpload :editFormData.picture
     };
-    console.log(editedContact)
-    const newContacts = [...contacts];
-    const index = contacts.findIndex((contact) => contact.id === editContactId);
-    newContacts[index] = editedContact;
-    setContacts(newContacts);
-    imageSelected ?   editDoctorImage(editContactId,editedContact.name,editFormData.qualification,
-      editFormData.experiance, editedContact.picture )
-    :editDoctor(editContactId,editedContact.name,editFormData.qualification,
-    editFormData.experiance, editedContact.picture ) 
+    console.log(editedContact.picture)
+    // const newContacts = [...contacts];
+    // const index = contacts.findIndex((contact) => contact.id === editContactId);
+    // newContacts[index] = editedContact;
+    //setContacts(newContacts);
+    editDoctor(editContactId,editedContact.name,editFormData.qualification,editFormData.experiance, editedContact.picture ) 
     setEditContactId(null);
-  loadDoctor()
+    loadDoctor()
       //window.location.reload(false)
   };
 
@@ -250,17 +250,17 @@ const [ignored, forceUpdate] = useReducer(x => x+ 1, 0);
   };
 
   const handleDeleteClick = (contactId) => {
-    const newContacts = [...contacts];
+    // const newContacts = [...contacts];
      deleteDoctor(contactId)
-    const index = contacts.findIndex((contact) => contact.id === contactId);
-    newContacts.splice(index, 1);
-    setContacts(newContacts);
+    // const index = contacts.findIndex((contact) => contact.id === contactId);
+    // newContacts.splice(index, 1);
+    //setContacts(newContacts);
     loadDoctor()
   };
  useEffect(()=>{
   const x = localStorage.getItem(("HospData"));
   const res = (JSON.parse(x))
-loopData = (res.data.data)
+loopData = (res?.data?.data)
 
 setDetailHospData(loopData)
 loadHospital()
@@ -468,7 +468,7 @@ loadHospital()
                 console.log("hellow")
                 const x = localStorage.getItem(("HospDataOne"));
                 const res = (JSON.parse(x))
-                const loopData = (res.data.dep)
+                const loopData = (res?.data?.dep)
                 setDeptArray(loopData)
                 console.log(res)
                  setHospName(val2)

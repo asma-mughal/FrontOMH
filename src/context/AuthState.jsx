@@ -2,6 +2,8 @@ import React from "react";
 import AuthContext from "./AuthContext";
 import axios from "axios";
 import { useState } from "react";
+export const url = "https://www.omigahealth.com";
+//export const url = "http://127.0.0.1:2300";
 const AuthState = (props) => {
   const [hospitalData, setHospData] = useState();
   const [doctorData, setDoctorData] = useState();
@@ -18,42 +20,44 @@ const AuthState = (props) => {
   const [imageSaveHosp, setImageSave] = useState();
   const [tryData, setTryData] = useState();
   const [tryDocData, setTryDocData] = useState();
-  const url = "http://164.92.107.25:2300";
-  //const url = "http://127.0.0.1:2300";
+  const [DocImage, setSelectedDocImage] = useState(false);
+  const [hospEditImage, setHospEditImg] = useState(false);
+  
   function addHospital(id, fullName, address, image) {
     const formData = new FormData();
     formData.append("name", fullName);
     selectedImages.forEach(function (value) {
       formData.append("picture", value); // you have to add array symbol after the key name
     });
+   
     axios.post(`${url}/api/v1/hospital/`, formData).then((res) => {
       console.log(res.data.data);
-      alert("Hospita added");
+      alert("Hospital added");
       setHospData(res.data.data.data);
-     loadHospital()
+      loadHospital()
       setSelectedImages([]);
     });
-    //     fetch(`${url}/api/v1/hospital/`, {
-    //        method: 'POST',
-    //        headers: {
-    //            'Accept': 'application/json',
-    //            'Content-Type': 'application/json',
-    //        },
-    //        body: JSON.stringify({
-    //         name:fullName,
-    //         picture:image,
-    //        })
-    //    })
-    //        .then((response) => response.json())
-    //        .then((responseData) => {
-    //            console.log(
-    //                "POST Response",
-    //                "Response Body -> " + JSON.stringify(responseData) +
-    //                alert("Congratulations! Hospital is registered") +
-    //                 setHospData(responseData.data.data) + setSelectedImages([])
-    //            )
-    //        })
-    //        .catch(error => console.log(error.toString() + alert("Oops!some error occured")))
+      //   fetch(`${url}/api/v1/hospital/`, {
+      //      method: 'POST',
+      //      headers: {
+      //          'Accept': 'application/json',
+      //          'Content-Type': 'application/json',
+      //      },
+      //      body: JSON.stringify({
+      //       name:fullName,
+      //       picture:selectedImages,
+      //      })
+      //  })
+      //      .then((response) => response.json())
+      //      .then((responseData) => {
+      //          console.log(
+      //              "POST Response",
+      //              "Response Body -> " + JSON.stringify(responseData) +
+      //              alert("Congratulations! Hospital is registered") +
+      //               setHospData(responseData.data.data) + setSelectedImages([])
+      //          )
+      //      })
+      //      .catch(error => console.log(error.toString() + alert("Oops!some error occured")))
     //addDepartment(hospitalData._id,address)
   }
   function addDepartment(address, id) {
@@ -102,51 +106,56 @@ const AuthState = (props) => {
         //alert("Hospital Edited")
       });
   }
+  function editHospImage(id, image) {
+   console.log(id, image)
+    const formData = new FormData()
+    formData.append("picture", image);
+    axios.patch(`${url}/api/v1/hospital/uploadImage/${id}`, formData).then((res) => {
+      console.log(res.data);
+    });
+  }
   function editHospital(dataEdit, img) {
     const Id = dataEdit.id;
-    console.log(dataEdit)
+    console.log(img)
     //console.log(img.push(imageSaveHosp?.picture.toString()))
-
+    img && editHospImage(Id,img)
     // addImage(Id)
     //console.log(dataEdit.image)
-    const formData = new FormData()
-    formData.append('name', dataEdit.name)
-    formData.append("picture", dataEdit.image)
-
-
-      // axios.patch(`http://localhost:2300/api/v1/hospital/${Id}`,formData).then((res)=>{
-      //     console.log(res.data.data)
-      //     alert("Hospital Edited")
-      // })
+    
+    // const formData = new FormData()
+    // formData.append('name', dataEdit.name)
+    //   axios.patch(`${url}/api/v1/hospital/${Id}`,formData).then((res)=>{
+    //       console.log(res.data.data)
+    //       alert("Hospital Edited")
+    //   })
     //  console.log(dataEdit)
     //  const Id = dataEdit.id;
     //  console.log(img)
     //http://localhost:2300/api/v1/hospital/${Id}
-    // fetch(`${url}/api/v1/hospital/${Id}`, {
-    //   method: "PATCH",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     name: dataEdit.name,
-    //     picture: dataEdit.image
-    //   }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((responseData) => {
-    //     console.log(
-    //       "PUT Response",
-    //       "Response Body -> " +
-    //         JSON.stringify(responseData) +
-    //         "Hospital Updated" +
-    //         alert("Hospital Updated! Refresh to see change") +
-    //         setSelectedImages([])
-    //     );
-    //   })
-    //   .catch((error) =>
-    //     console.log(error.toString() + alert("Oops! Some error occured"))
-    //   );
+    fetch(`${url}/api/v1/hospital/${Id}`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: dataEdit.name,
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        console.log(
+          "PUT Response",
+          "Response Body -> " +
+            JSON.stringify(responseData) +
+            "Hospital Updated" +
+            alert("Hospital Updated! Refresh to see change") +
+            setSelectedImages([])
+        );
+      })
+      .catch((error) =>
+        console.log(error.toString() + alert("Oops! Some error occured"))
+      );
   }
   function getOneHospital(id) {
     //console.log(id)
@@ -266,20 +275,13 @@ const AuthState = (props) => {
     //     })
     //     .catch(error => console.log(error.toString()+ alert("Oops! Some error occured")))
   }
-  function editDoctorImage(id, fullName, certificate, experience, image) {
-    console.log(id, fullName, certificate, experience, image);
-    const formData = new FormData();
-    formData.append("name", fullName);
-    formData.append("qualification", certificate);
-    formData.append("experiance", experience);
+  function editDoctorImage(id, image) {
+    console.log(id, image)
+    const formData = new FormData()
     formData.append("picture", image);
-    //formData.append('picture', image)
-    axios.patch(`${url}/api/v1/doctor/${id}`, formData).then((res) => {
-      console.log(res.data.data);
-      setDoctorData(res.data.data);
-      loadDoctor()
+    axios.patch(`${url}/api/v1/doctor/imageUpload/${id}`, formData).then((res) => {
+      console.log(res?.data?.data);
     });
-    console.log("Image Selected");
   }
   function editDoctor(id, fullName, certificate, experience, image) {
     console.log(id, fullName, certificate, experience, image);
@@ -295,6 +297,7 @@ const AuthState = (props) => {
     //       setDoctorData(res.data.data)
     //       retrieveDoctor()
     // })
+    DocImage &&  editDoctorImage(id, image)
     fetch(`${url}/api/v1/doctor/${id}`, {
       method: "PATCH",
       headers: {
@@ -349,7 +352,8 @@ const AuthState = (props) => {
   }
   const loadDoctor = async() =>{
     const response = await axios.get(`${url}/api/v1/doctor/`);
-    setTryDocData(response.data.data.doctors)
+    setTryDocData(response?.data?.data?.doctors)
+    console.log(response?.data?.data?.doctors)
   }
   function retrieveDoctor() {
     
@@ -398,6 +402,17 @@ const AuthState = (props) => {
   function logOut() {
     console.log("Logging out");
   }
+  const getImage = (name) =>{
+    //console.log(name)
+    axios
+      .get(`${url}/api/v1/hospital/getImage/${name}`)
+      .then((response) => {
+        const onImage = response.data;
+        return onImage;
+        
+      })
+      .catch((error) => console.log(`Error: ${error}`));
+  }
   const state = {
     name: "harry",
     addHospital,
@@ -439,7 +454,12 @@ const AuthState = (props) => {
     tryData,
     loadHospital,
     loadDoctor,
-    tryDocData
+    tryDocData,
+    getImage,
+    DocImage,
+    setSelectedDocImage,
+    hospEditImage, 
+    setHospEditImg
   };
   return (
     <AuthContext.Provider value={state}>{props.children}</AuthContext.Provider>

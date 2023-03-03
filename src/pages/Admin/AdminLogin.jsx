@@ -12,13 +12,21 @@ const AdminLogin = () => {
   const [loading,setLoading] = useState(false);
   const navigate = useNavigate();
   const {login } = useContext(AuthContext)
+  const email2 = "abc123a@gmail.com";
+  const password2 = "password123";
   const token = localStorage.getItem('Token');
   async function handleSubmit (e) {
   e.preventDefault();
       try {
           setError('')
           setLoading(true)
-         await login(emailRef.current.value,passRef.current.value);
+          if(email2== emailRef.current.value && password2 == passRef.current.value){
+            await login(emailRef.current.value,passRef.current.value);
+            setError('')
+          }
+          else {
+            setError('Incorrect password or email')
+          }
          
          //navigate("/home");
       }

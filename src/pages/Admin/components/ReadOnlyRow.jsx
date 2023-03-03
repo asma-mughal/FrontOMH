@@ -5,16 +5,17 @@ const ReadOnlyRow = ({ item, handleEditClick, handleDeleteClick }) => {
   const navigate = useNavigate();
     
   const handleImageGallery = (i) => {
-    console.log(i)
-    const base64String = btoa(String.fromCharCode(...new Uint8Array(i)));
-    var binary = "";
-    var bytes = [].slice.call(new Uint8Array(i.data.data));
-    bytes.forEach((b) => (binary += String.fromCharCode(b)));
-    const images = localStorage.setItem(
-      "Images",
-      JSON.stringify(window.btoa(binary))
-    );
-    const name = localStorage.setItem("Hospital", JSON.stringify(true))
+    //console.log(i)
+    localStorage.setItem("ImageHospital", JSON.stringify(i))
+    // const base64String = btoa(String.fromCharCode(...new Uint8Array(i)));
+    // var binary = "";
+    // var bytes = [].slice.call(new Uint8Array(i.data.data));
+    // bytes.forEach((b) => (binary += String.fromCharCode(b)));
+    // const images = localStorage.setItem(
+    //   "Images",
+    //   JSON.stringify(window.btoa(binary))
+    // );
+    // const name = localStorage.setItem("Hospital", JSON.stringify(true))
     navigate("/gallery");
   };
   return (

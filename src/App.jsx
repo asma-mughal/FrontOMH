@@ -25,6 +25,8 @@ function App() {
     document.body.dir = "rtl";
   }
  })
+ const token = localStorage.getItem('Token');
+ 
   return (
     <>
     <AuthState>

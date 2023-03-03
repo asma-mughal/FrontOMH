@@ -1,11 +1,13 @@
-import { frank1, frank2, frank3, frank4, heid1, heid2, heid3, heid4, karl1, 
+import {  frank1, frank2, frank3, frank4, heid1, heid2, heid3, heid4, karl1, 
   karl2, karl3, karl4, karl5, service1, service2, service3 , service4,wurzs1, wurzs2,wurzs3} from "../assets";
 
   import {
     UilUser,
     UilHospital,
     UilEstate,
+  UilBackward
   } from "@iconscout/react-unicons";
+ 
 export const navLinks = [
   {
     id: "home",
@@ -169,6 +171,10 @@ export const SidebarData = [
     icon: UilUser,
     heading: "Doctors",
   },
+  {
+    icon:UilBackward,
+    heading:"Back"
+  }
  
 ];
 export const docInfo =[

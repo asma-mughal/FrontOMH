@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import AuthContext from '../context/AuthContext';
 import { heid1, heid2 } from '../assets';
+import { url } from '../context/AuthState';
 import { useEffect } from 'react';
 const SliderTemperory = ({icon}) =>{
   const settings = {
@@ -20,19 +21,16 @@ const SliderTemperory = ({icon}) =>{
     arrows: false,
 
   };
- 
-  var binary = '';
-  var bytes = [].slice.call(new Uint8Array(icon.data.data));
-  bytes.forEach((b) => binary += String.fromCharCode(b));
-  let binary1 = ( window.btoa(binary));
   return( 
     <Slider {...settings}
     className="w-80 h-48 bg-sky-50 md:h-full md:w-full lg:h-full lg:w-full "
     >
-     <img src={`data:image/png;base64,${binary1}`} 
-      alt="hospital" className='w-20 h-36 lg:h-52 lg:w-96' />
-  
-   
+    {icon?.map((i)=>{
+
+      return ( <img src={`${url}/api/v1/hospital/getImage/${i}`} 
+      alt="hospital" className='w-20 h-36 lg:h-52 lg:w-96' />)
+    })}
+
     </Slider>
   )
     }
@@ -40,20 +38,21 @@ const SliderTemperory = ({icon}) =>{
 export const Card = ({ _id,icon, name, bg,t, setDoc, picture}) =>{
   const navigate = useNavigate();
   const { getOneHospital,setDeptarray } = useContext(AuthContext)
+ 
   const handleHospital = (i) =>{
     setDoc(i)
     localStorage.setItem('IdMainHosp', i)
     getOneHospital(i)
     const x = localStorage.getItem(("HospDataOne"));
     const res = (JSON.parse(x))
-    const loopData = (res.data.dep)
+    const loopData = (res?.data?.dep)
     //console.log(loopData)
     
     setTimeout(()=>{
       navigate('/dept');
     },[6000])
     }
-   
+   //logoTets.jpeg
   return (  
     <div className='flex xl:px-10 py-3 lg:py-0 sm:px-10 px-10 '>
   <div className={`flex flex-col  rounded-sm shadow-md w-full overflow-hidden sm:w-52  
@@ -79,12 +78,12 @@ export const Card = ({ _id,icon, name, bg,t, setDoc, picture}) =>{
     }}/>
     
     <button 
-       className='bg-transparent border-0 border-transparent cursor-pointer'
+       className='bg-sky-50 border-0 border-transparent cursor-pointer'
        onClick={()=>handleHospital(_id)}
        >
-            <h5 class="text-gray-900 font-poppins text-lg tracking-tight mb-2
+            <h5 class=" font-poppins text-lg tracking-tight mb-2
             cursor:pointer
-            dark:text-white p-10 hover:underline hover:text-secondary" >
+            dark:text-white p-10 hover:underline uppercase text-secondary" >
               {t(name)}</h5>
               </button>
      

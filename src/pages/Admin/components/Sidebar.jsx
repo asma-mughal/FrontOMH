@@ -5,11 +5,14 @@ import { Logo1 } from '../../../assets';
 import { SidebarData } from "../../../constants/index";
 import { UilBars } from "@iconscout/react-unicons";
 import { motion } from "framer-motion";
+import { useNavigate } from 'react-router-dom';
+
 const Sidebar = ({showHospital, setShowHospital,showTable, setShowTable,
   showDashboard, setDashboard}) => {
     const [selected, setSelected] = useState(0);
 
     const [expanded, setExpaned] = useState(true)
+    const navigate= useNavigate();
     const {t, i18n} = useTranslation(['ABOUT']);
     const sidebarVariants = {
       true: {
@@ -60,7 +63,11 @@ const Sidebar = ({showHospital, setShowHospital,showTable, setShowTable,
               setShowHospital(false)
               setShowTable(true)
             }
+            else if(item.heading=="Back"){
+             navigate("/")
+            }
             }}
+          
           >
             <item.icon />
             <span>{t(item.heading)}</span>

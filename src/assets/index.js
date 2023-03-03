@@ -1,9 +1,4 @@
-function PicsName(name) {
-    const middle = name.substring(27);
-     return middle
-    //return name;
-}
-
+import back from './arrow.png';
 import Logo1 from './OMIGAHEALTH LOGO PNG-13.png';
 import Logo2 from './OMIGAHEALTH LOGO PNG-15.png';
 import Logo3 from './OMIGAHEALTH LOGO PNG-16.png';
@@ -13,7 +8,7 @@ import service2 from './target.png';
 import service3 from './8833961.png';
 import service4 from './service4.png';
 import heart from './heart (1).png';
-import FooterLogo from './Foterlogo.png';
+import FooterLogo from './newlogo.png';
 import lang from './lang.png';
 import arabic from './united-arab-emirates.png';
 import english from './united-kingdom.png';
@@ -50,8 +45,11 @@ import acc from './account.png';
 import linkedin from './linkedin.png';
 import gith from './github.png';
 import Mail from './mail.png';
+import mainLogo from './mainNavbar.png';
+import avatar1 from './logoTets.jpeg';
 export {Logo1, Logo2, Logo3,hero, service1, service2, service3, service4, heart, 
     FooterLogo, lang, arabic, english, contact, aboutImg, whatsapp,
 frank1, frank2, frank3, frank4, heid1, heid2, heid3, heid4, karl1, karl2, karl3, karl4, karl5,
-wurzs1, wurzs2,wurzs3,avatar, surgoen,dept, PM, MS, Girl, fb, google, acc, linkedin, gith, Mail
+wurzs1, wurzs2,wurzs3,avatar, surgoen,dept, PM, MS, Girl, fb, google, acc, linkedin, gith, Mail,
+back, mainLogo, avatar1
 }

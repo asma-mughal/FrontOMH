@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react'
-
+import { url } from '../context/AuthState';
 const ImageDocGallery = () => {
     const [imagegal, setImage] = useState([]);
     let title ;
     useEffect(() => {
-      const img = localStorage.getItem("Images");
-      setImage(JSON.parse(img));
+      const img = localStorage.getItem("ImageDoctor");
+      setImage(JSON.parse(img))
     }, []);
+    console.log(imagegal)
   return (
     <>
     <div
@@ -32,7 +33,10 @@ const ImageDocGallery = () => {
           className="grid grid-cols-1 gap-5 
       md:grid-cols-2 xl:grid-cols-3 pb-20 m-5 lg:container items-center justify-center lg:ml-10"
         >
-          <img src={`data:image/png;base64,${imagegal}`} width="300" />
+           {imagegal?.map((i)=>{
+            return ( 
+            <img src={`${url}/api/v1/doctor/getImage/${i}`} width="300" />)
+          })}
         </section>
       )}
     </div>

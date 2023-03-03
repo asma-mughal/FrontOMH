@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import {hero}  from '../assets/index';
 import styles from '../style';
-import i18next from "i18next";
 import { useNavigate  } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 
 const Hero = ({dot,setDot}) => {
     const {t} = useTranslation(['ABOUT']);
-    const [click, setClick] = useState(false);
     const navigate = useNavigate();
     return (
         <section id="about1" name="about1" className={`flex md:flex-row flex-col bg-sky-50 pt-28

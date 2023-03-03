@@ -51,15 +51,15 @@ const Footer = () => {
           subMenu: [
             {
               id: 1,
-              title: "Toll Free: (877)833-4635",
+              title: "Toll Free: +(49) 17661843993",
             },
             {
               id: 2,
-              title: "West Coast:(424)253-5282",
+              title: "Frankfurt-Germany:+(49) 17661843993",
             },
             {
               id: 3,
-              title: "Email: hellow@gmail.com",
+              title: "Email: info.de@omigahealth.com",
             },
           ],
         },
@@ -67,55 +67,127 @@ const Footer = () => {
       ];
       const navigate = useNavigate();
   return (
-    <div className="bg-sky-100 border-white">
-    <div className=" max-w-screen-xl pt-10 ">
-      <div className="grid grid-cols-2 lg:grid-cols-4 text-center
-      gap-12"
-      >
-      <h1 className={`text-white font-bold tracking-widest text-2xl font-poppins
-     
-      `}><img  src={FooterLogo} /></h1>
-        {menu.map(({ id, title, subMenu }) => (
-          <div key={id} className="">
-            <h1 className="text-lg font-bold text-secondary font-poppins">{t(title)}</h1>
-            <ul className="mt-1">
-              {subMenu.map(({ id, title, link }) => (
-                <li key={id}>
-                  <a href={link} 
-                  
-                  onClick={()=>{
-                    title=="Admin Login" && navigate("/admin")
-                    title=="Hospitals" && navigate("/detail")
-                    title=="Details" && navigate("/developer")
-                  }}
-                  className="text-black font-poppins
-                  hover:text-secondary
-                  ">{t(title)}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-      
-    </div>
-    <div className="flex flex-col justify-center items-center text-center  font-poppins
-    p-10 mt-10 bg-sky-100 
-    "
-    style={{
-      borderBottom:'2px',
-      borderColor:'#f8fafc',
-      borderWidth:'1px'
-    }}
+    <footer aria-label="" class="bg-sky-100 font-poppins">
+    <div
+      class="max-w-screen-xl px-4 py-5 mx-auto  sm:px-6 lg:px-8"
     >
-				<h1 className=" text-gray-500 font-sm font-poppins">
-					© 2021-2022 {t("All rights reserved | Build with")}<span className="text-secondary"> ❤ </span>{t("by")}{" "}
+      <img src={FooterLogo} />
+  
+      <div
+        class="grid grid-cols-1 gap-8 sm:grid-cols-2 
+        lg:grid-cols-4 "
+      >
+        <div>
+          <p class="font-medium mx-3 text-gray-900">{t("Services")}</p>
+  
+          <nav aria-label="Footer Navigation - Services" class="mt-6">
+            <ul class="text-sm">
+              <li>
+                <a onClick={()=>navigate("/detail")} class="text-gray-700 transition hover:opacity-75">
+                {t("Hospitals")}
+
+                </a>
+              </li>
+  
+              <li>
+                <a onClick={()=>navigate("/admin")} class="text-gray-700 transition hover:opacity-75">
+
+{t("Admin Login")}
+
+                </a>
+              </li>
+  
+              <li>
+                <a href="#" class="text-gray-700 transition hover:opacity-75">
+          
+{t("Medications")}
+
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+  
+        <div>
+          <p class="font-medium  mx-3 text-gray-900">{t("Company")}</p>
+  
+          <nav aria-label="Footer Navigation - Company" class="mt-6">
+            <ul class="text-sm">
+              <li>
+              <a onClick={()=>navigate("/developer")} class="text-gray-700 transition hover:opacity-75">
+            
+            {t("Details")}
+                            </a>
+              </li>
+  
+  
+              <li>
+                <a href="#" class="text-gray-700 transition hover:opacity-75">
+                 {t("Accounts Review")}
+                </a>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+  
+        <div>
+          <p class="font-medium  mx-3 text-gray-900">{t("Contact")}</p>
+  
+          <nav aria-label="Footer Navigation - Company" class="mt-6">
+            <ul class="text-sm">
+              <li>
+                <a href="#" class="text-gray-700 transition hover:opacity-75">
+               info.de@omigahealth.com
+                </a>
+              </li>
+  <a href='#' class="text-gray-700 mx-2 transition hover:opacity-75">+(49) 17661843993</a>
+              <li>
+                <a href="#" class="text-gray-700 transition hover:opacity-75">
+               
+                </a>
+              </li>
+  
+              <li>
+                
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div>
+          <p class="font-medium text-gray-900 mx-3">{t("Helpful Links")}</p>
+
+          <nav aria-label="Footer Navigation - Legal" class="mt-6">
+            <ul class="text-sm">
+              <li>
+                <a href="" class="text-gray-700 transition hover:opacity-75"
+                onClick={()=>navigate('/developer')}
+                >
+                {t("Developers Page")}
+                </a>
+              </li>
+
+              
+
+             
+
+             
+            </ul>
+          </nav>
+        </div>
+       
+      </div>
+  
+      <h1 className=" text-gray-500 mx-3 lg:mx-0 font-sm font-poppins">
+					© 2022-2023 {t("All rights reserved | Build by")}{" "}
 					<span className="">
-						{t("abc")}{" "}
+						{t("nexgensol")}{" "}
 					</span>
 				</h1>
-			</div>
-  </div>
+    </div>
+  </footer>
+  
+
   )
 }
 

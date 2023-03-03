@@ -1,7 +1,7 @@
 import React, {useState, useEffect, Fragment} from 'react';
 import i18next from "i18next";
 import { Link, animateScroll as scroll, } from 'react-scroll'
-import {Logo1} from '../assets/index';
+import {mainLogo} from '../assets/index';
 import { useTranslation } from 'react-i18next';
 import { MenuIcon, XIcon, ChevronDownIcon } from '@heroicons/react/outline';
 import { Menu, Transition } from '@headlessui/react';
@@ -43,14 +43,14 @@ const Navbar = ({setDot, dot}) => {
     <div className='w-screen h-[80px] z-10 bg-sky-50 fixed drop-shadow-lg font-poppins'>
     <div className='flex justify-between items-center w-full h-full'>
       <div className='flex items-center'>
-      <img src={Logo1} className="pt-3"  />
+      <img src={mainLogo} className="pt-3 lg:w-96 lg:h-52 xl:w-96 xl:h-52"  />
         <ul className='hidden md:flex text-xs  font-bold uppercase'
         
         >
-        <li className='hover:text-secondary'>
-        <Link activeClass="activeLink" to="home" spy={true}
-          
-          smooth={true} duration={500} >{t("HOME")}</Link>
+        <li className='hover:text-secondary cursor-pointer'
+        onClick={()=>navigate('/')}
+        >
+          {t("HOME")}
         </li>
         <li className='hover:text-secondary '
         >
@@ -62,7 +62,7 @@ const Navbar = ({setDot, dot}) => {
           onClick={()=>navigate("/abt")}>{t("ABOUT")}</button></Link></li>
         <li className='hover:text-secondary'>
         <Link activeClass="activeLink" to="services" spy={true}
-         
+          
         smooth={true} duration={500} >{t("SERVICES")}</Link>
         </li>
         <li className='hover:text-secondary'>
@@ -138,10 +138,11 @@ const Navbar = ({setDot, dot}) => {
       </div>
     </div>
     <ul className={!nav ? 'hidden' : 'absolute bg-sky-50 w-full px-8 text-sm font-bold'}>
-    <li className='hover:text-secondary'><Link to="home" 
-        smooth={true} activeClass="activeLink"  duration={500}>{t("HOME")}</Link></li>
-        <li className='hover:text-secondary '>
-          <Link to="about" smooth={true}  activeClass="activeLink"  offset={-200} duration={500}>{t("ABOUT")}</Link></li>
+    <li className='hover:text-secondary'  onClick={()=>navigate('/')}>{t("HOME")}</li>
+        <li className='hover:text-secondary '
+         onClick={()=>navigate("/abt")}
+        >
+         {t("ABOUT")}</li>
         <li className='hover:text-secondary'>
           <Link to="services" smooth={true} duration={500}>{t("SERVICES")}</Link></li>
         <li className='hover:text-secondary'>

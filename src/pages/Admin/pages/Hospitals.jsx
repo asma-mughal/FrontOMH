@@ -22,6 +22,7 @@ const Hospitals = () => {
     deleteHospital,hospitalAdded, setHospitalAdded,addDepartment ,hospitalData,
     selectedImages, setSelectedImages, addImage,loadHospital,
     tryData,
+    hospEditImage, setHospEditImg
     
 } = useContext(AuthContext)
   const onSelectFile = (event) => {
@@ -32,12 +33,12 @@ const Hospitals = () => {
     // });
     //  setSelectedImages((previousImages) => previousImages.concat(imagesArray));
     const file = event.target.files[0];
-     setSelectedImages([...selectedImages, file])
-    setImageSelected(true)
+    setSelectedImages([...selectedImages, file])
+    //setImageSelected(true)
     //event.target.value = "";
   };
+  
   const onUpdateSelectFile = (event, id) => {
-
     //  const selectedFiles = event.target.files;
     //  const selectedFilesArray = Array.from(selectedFiles);
     // const imagesArray = selectedFilesArray.map((file) => {
@@ -45,14 +46,13 @@ const Hospitals = () => {
     // });
     //  setSelectedImages((previousImages) => previousImages.concat(imagesArray));
     const file = event.target.files[0];
-    // selectedImages.push(file)
     // //console.log(file.name)
     // setImageSelected(true)
     // //event.target.value = "";
-    setImageUpdate(file)
-    
-    setImageSelected(true)
+   setImageUpdate(file)
+    setHospEditImg(true)
   };
+  console.log(onImageUpdate)
     useEffect(()=>{
      loadHospital()
     },[])
@@ -108,7 +108,6 @@ const Hospitals = () => {
     newFormData[fieldName] = fieldValue;
     setEditFormData(newFormData) 
   };
-
   const handleAddFormSubmit = (event) => {
     event.preventDefault();
     const newContact = {
@@ -125,7 +124,7 @@ const Hospitals = () => {
     loadHospital()
     setTimeout(()=>{
       setHospitalAdded(true)
-      selectedImages.length = 0;
+      //selectedImages.length = 0;
     },[1000])
   }
   const handleEditFormSubmit = (event) => {
@@ -136,9 +135,7 @@ const Hospitals = () => {
      image: editFormData.image
     };
     const newContacts = [...contacts];
-    console.log(editedContact)
-    imageSelected && editHospital(editedContact,onImageUpdate)
-    editHospital(editedContact, selectedImages)
+    editHospital(editedContact, onImageUpdate)
     setContacts(newContacts);
     setEditContactId(null);
     setHospitalId(null)
@@ -153,7 +150,8 @@ const Hospitals = () => {
       image:contact.picture,
     };
     setEditFormData(formValues)
-    setSelectedImages([...formValues.image])
+    setSelectedImages([...selectedImages, formValues.image])
+    //setSelectedImages(formValues.image)
   };
   const handleCancelClick = () => {
     setHospitalId(null)
@@ -285,6 +283,7 @@ const Hospitals = () => {
                     item={item}
                     handleEditClick={handleEditClick}
                     handleDeleteClick={handleDeleteClick}
+                    
                   />
                 )}
               </Fragment> {/* To check if there is any contact Id or not? if there is no
@@ -357,6 +356,7 @@ const Hospitals = () => {
                             {t("Attach your Image")}</p>
                     </div>
                     <input type="file" class="opacity-0"
+                    multiple
                     onChange={onSelectFile}
                     accept="image/png , image/jpeg, image/webp"
                    
