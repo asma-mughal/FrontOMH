@@ -5,7 +5,7 @@ import { useNavigate  } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 
-const Hero = ({dot,setDot}) => {
+const Hero = () => {
     const {t} = useTranslation(['ABOUT']);
     const navigate = useNavigate();
     return (

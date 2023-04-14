@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useContext } from "react";
 import AuthContext from "../../../context/AuthContext";
 import Select from 'react-select'
+import { optionList } from "../../../constants";
 import { useReducer } from "react";
 const Hospitals = () => {
   const [contacts, setContacts] = useState(data);
@@ -14,17 +15,16 @@ const Hospitals = () => {
   const [loading,setLoading] = useState(false);
   const {t} = useTranslation(['ABOUT']);
   const [hospitalId, setHospitalId] = useState(null);
-  const [imageSelected, setImageSelected] = useState(false);
-  const [data2, setData] = useState();
+  const deptDescription = useRef();
   const [ignored, forceUpdate] = useReducer(x => x+ 1, 0);
   const [onImageUpdate, setImageUpdate] = useState();
   const { addHospital,editHospital,
     deleteHospital,hospitalAdded, setHospitalAdded,addDepartment ,hospitalData,
-    selectedImages, setSelectedImages, addImage,loadHospital,
-    tryData,
-    hospEditImage, setHospEditImg
+    selectedImages, setSelectedImages,loadHospital,
+    tryData, setHospEditImg
     
 } = useContext(AuthContext)
+
   const onSelectFile = (event) => {
     //  const selectedFiles = event.target.files;
     //  const selectedFilesArray = Array.from(selectedFiles);
@@ -37,8 +37,9 @@ const Hospitals = () => {
     //setImageSelected(true)
     //event.target.value = "";
   };
-  
   const onUpdateSelectFile = (event, id) => {
+    console.log("here")
+  
     //  const selectedFiles = event.target.files;
     //  const selectedFilesArray = Array.from(selectedFiles);
     // const imagesArray = selectedFilesArray.map((file) => {
@@ -52,42 +53,21 @@ const Hospitals = () => {
    setImageUpdate(file)
     setHospEditImg(true)
   };
-  console.log(onImageUpdate)
     useEffect(()=>{
      loadHospital()
     },[])
+    
   const [addFormData, setAddFormData] = useState({
     fullName: "",
-    address: "",
+    description: "",
     image: "",
   });
-  const optionList = [
-    { value: "Casualty ", label: "Casualty " },
-    { value: "Operating theatre (OT)", label: "Operating theatre (OT)" },
-    { value: " Intensive care unit (ICU)", label: " Intensive care unit (ICU)" },
-    { value: "Anesthesiology ", label: "Anesthesiology " },
-    { value: "ENT ", label: "ENT " },
-    { value: "Geriatric ", label: "Geriatric " },
-    { value: "Gastroenterology ", label: "Gastroenterology " },
-    { value: "Haematology", label: "Haematology" },
-    { value: "Pediatrics", label: "Pediatrics" },
-    { value: "Neurology", label: "Neurology" },
-    { value: "Oncology", label: "Oncology " },
-    { value: "Orthopaedic", label: "Orthopaedic" },
-    { value: "Urology", label: "Urology" },
-    { value: "Inpatient ", label: "Inpatient " },
-    { value: "Pharmacy", label: "Pharmacy" },
-    { value: "Radiology", label: "Radiology" },
-    { value: "Clinical pathology", label: "Clinical pathology" },
-    { value: "Nutrition and dietetics", label: "Nutrition and dietetics" },
-    { value: "Catering and food services", label: "Catering and food services" },
-    { value: "Central sterilization unit", label: "Central sterilization unit" },
-    { value: "Housekeeping", label: "Housekeeping" },
-  ];
+ 
   const [selectedOptions, setSelectedOptions] = useState();
   let loopData;
   const [editFormData, setEditFormData] = useState({
    name:"",
+   description:"",
    picture:[]
   }); 
   const [editContactId, setEditContactId] = useState(null);
@@ -113,14 +93,14 @@ const Hospitals = () => {
     const newContact = {
       id: nanoid(),
       fullName: addFormData.fullName,
-      address: addFormData.address,
+      description: addFormData.description,
       image:selectedImages,
     };
     event.target.reset();
     setSelectedOptions(null)
     const newContacts = [...contacts, newContact];
     setContacts(newContacts);
-    addHospital(nanoid(), addFormData.fullName,selectedOptions, selectedImages )
+    addHospital(addFormData.fullName,addFormData.description )
     loadHospital()
     setTimeout(()=>{
       setHospitalAdded(true)
@@ -132,7 +112,8 @@ const Hospitals = () => {
     const editedContact = {
       id:hospitalId,
      name: editFormData.name,
-     image: editFormData.image
+     image: editFormData.image,
+     description : editFormData.description
     };
     const newContacts = [...contacts];
     editHospital(editedContact, onImageUpdate)
@@ -147,6 +128,7 @@ const Hospitals = () => {
      setHospitalId(contact.id)
     const formValues = {
       name:contact.name,
+      description:contact.description,
       image:contact.picture,
     };
     setEditFormData(formValues)
@@ -168,12 +150,12 @@ const Hospitals = () => {
   const handleDeptFormSubmit = (event) => {
     event.preventDefault();
     console.log(hospitalData?._id)
-    addDepartment(selectedOptions,hospitalData?._id)
+    addDepartment(selectedOptions,hospitalData?._id, deptDescription?.current?.value)
     event.target.reset();
     setSelectedOptions(null)
      loadHospital()
   };
-    
+
   const DepartmentForm = () =>{
     return (  
     <div className="flex min-h-full
@@ -211,7 +193,22 @@ const Hospitals = () => {
   isSearchable={true}
   />
   </div>
-  
+  <textarea 
+      name="deptDescription" 
+      ref={deptDescription}
+        required
+        type="text"
+         placeholder={t("Enter description")}
+         className="text-body-color 
+         focus:border-primary w-full resize-none 
+         mt-2
+         sm:text-sm
+         rounded-t-md
+         placeholder-gray-500 
+          font-poppins
+         rounded py-5 text-start px-[8px] text-base outline-none"
+        />
+
      <button
                type="submit"
                className="group  relative flex
@@ -251,6 +248,9 @@ const Hospitals = () => {
                 </th>
                 <th scope="col" class="py-3 px-6">
                 {t("Name")}
+                </th>
+                <th scope="col" class="py-3 px-6">
+                {t("Description")}
                 </th>
 
                 <th scope="col" class="py-3 px-6">
@@ -321,11 +321,25 @@ const Hospitals = () => {
           className="relative block 
           focus:outline-none 
           w-full appearance-none rounded-none rounded-t-md border 
-           px-2 py-2 text-gray-900 placeholder-gray-500 
+           px-2 text-start 
+           py-2 text-gray-900 placeholder-gray-500 
           sm:text-sm "
           required="required"
           placeholder={t("Enter Hospital Name")}
           onChange={handleAddFormChange}
+        />
+         <textarea name="description" 
+          onChange={handleAddFormChange}
+        required
+         placeholder={t("Enter description")}
+         className="text-body-color 
+         focus:border-primary w-full resize-none 
+         mt-2
+         sm:text-sm
+         rounded-t-md
+         placeholder-gray-500 
+          font-poppins
+         rounded py-5 text-start px-[8px] text-base outline-none"
         />
         <div className="dropdown-container w-full
          appearance-none rounded-none rounded-t-md 
@@ -339,11 +353,11 @@ const Hospitals = () => {
     </div>
        <div class="w-full ">
         <div class="">
-         {selectedImages.length!=0 &&  <p className="text-sm">Uploaded Image Successfully!</p>}
+      
         <div class="flex items-center justify-center w-full">
-        
+       
                 <label
-                    class="flex flex-col w-full  mt-2 m-1  h-24 border-2 border-secondary border-dashed
+                    class="flex flex-col w-full m-1  h-24 border-2 border-secondary border-dashed
                      hover:bg-gray-100 hover:border-gray-300">
                     <div class="flex flex-col items-center justify-center pt-7">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-400 group-hover:text-gray-600"
@@ -361,8 +375,10 @@ const Hospitals = () => {
                     accept="image/png , image/jpeg, image/webp"
                    
                     />
+                     {selectedImages.length!=0 &&  <p className="text-sm mt-4">Uploaded Image Successfully!</p>}
                 </label>
             </div>
+       
         </div>
       
     </div>
@@ -372,7 +388,7 @@ const Hospitals = () => {
                  className="group  relative flex
                  cursor-pointer
                   w-full justify-center rounded-md border border-transparent bg-secondary
-                   py-2 mt-5 px-4 text-sm font-medium text-white hover:bg-white
+                   py-2 mt-8 px-4 text-sm font-medium text-white hover:bg-white
                    hover:text-black hover:border-secondary
                     focus:outline-none "
                >

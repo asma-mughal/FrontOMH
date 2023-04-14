@@ -16,21 +16,20 @@ const Users = () => {
   const [imageUpload, setImageUpload] = useState(null);
   const {t, i18n} = useTranslation(['ABOUT']);
   const [data2,setData] = useState()
-  const [deptName,setDeptName] = useState();
+ 
   const [hospital, setHospital] = useState('');
   const [dept, setDept] = useState('');
   const [hospitalEdit,setHospitalEdit] = useState('');
   const [deptEdit,setDeptEdit] = useState(dept);
   const [detailHospData, setDetailHospData] = useState();
   const [deptArray,setDeptArray] = useState('');
-  const [hospName, setHospName] = useState(null);
   const [imageSelected, setImageSelected] = useState(false);
 const [ignored, forceUpdate] = useReducer(x => x+ 1, 0);
   const {  addDoctor, 
     editDoctor, 
     deleteDoctor, onHosp,docDeptAdded, setDocDeptAdded,editDoctorImage,loadDoctor,
     tryDocData,loadHospital,
-    tryData,getOneHospital, DocImage, setSelectedDocImage} =
+    tryData,getOneHospital, DocImage, setSelectedDocImage,deptName,setDeptName,hospName, setHospName} =
      useContext(AuthContext);
   const [addFormData, setAddFormData] = useState({
     fullName: "",

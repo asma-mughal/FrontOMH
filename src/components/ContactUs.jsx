@@ -32,22 +32,22 @@ const ContactUs = () => {
   };
 
   return (
-    <section class="z-10 overflow-hidden  mx-10 mt-10 my-10 bg-white   "name="contact" id="contact"  >
-    <div class="container mx-auto items-center p-10"> 
+    <section className="z-10 overflow-hidden  mx-10 mt-10 my-10 bg-white   "name="contact" id="contact"  >
+    <div className="container mx-auto items-center p-10"> 
     
-      <div class="-mx-4 flex flex-wrap lg:justify-between">
-        <div class="w-full px-4 lg:w-1/2 xl:w-6/12">
-          <div class="mb-12 max-w-[570px] lg:mb-0">
+      <div className="-mx-4 flex flex-wrap lg:justify-between">
+        <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
+          <div className="mb-12 max-w-[570px] lg:mb-0">
             <img src={aboutImg} />
           </div>
         </div>
-        <div class="w-full px-4 lg:w-1/2 xl:w-5/12">
-          <div class="relative rounded-lg bg-white p-8 shadow-lg sm:p-12">
+        <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
+          <div className="relative rounded-lg bg-white p-8 shadow-lg sm:p-12">
           {show && <p className='font-poppins
     text-sm mb-2  capitalize
     '>{t("Message has been sent")}.</p>}
           <h2
-              class="text-dark
+              className="text-dark
               
               mb-6 uppercase font-bold text-xl font-poppins"
             >
@@ -59,7 +59,7 @@ const ContactUs = () => {
         required
         type="text" 
         placeholder={t("Your Name")}
-        class="text-body-color border-[f0f0f0]
+        className="text-body-color border-[f0f0f0]
         
         font-poppins
          m-2
@@ -70,7 +70,7 @@ const ContactUs = () => {
                required
                type="email" name="email" 
         placeholder={t("Your Email")}
-        class="text-body-color border-[f0f0f0] 
+        className="text-body-color border-[f0f0f0] 
         focus:border-primary w-full rounded border 
         font-poppins
         m-2
@@ -81,14 +81,14 @@ const ContactUs = () => {
         <textarea name="Fullmessage" 
         required
          placeholder={t("Your Message")}
-         class="text-body-color border-[f0f0f0] 
+         className="text-body-color border-[f0f0f0] 
          focus:border-primary w-full resize-none 
          m-2
           font-poppins
          rounded border py-3 px-[14px] text-base outline-none focus-visible:shadow-none"
         />
         <button type="submit"
-         class="bg-secondary 
+         className="bg-secondary 
          m-2
          cursor-pointer
          border-secondary w-full font-poppins rounded border p-3

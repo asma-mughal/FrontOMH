@@ -38,8 +38,7 @@ style={{
  </div>
 );
 
-const Service = ({dot}) => {
-  console.log(dot)
+const Service = () => {
   const {t} = useTranslation(['ABOUT']);
   const a = useContext(AuthContext)
   return (

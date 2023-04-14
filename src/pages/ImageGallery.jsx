@@ -11,7 +11,6 @@ const ImageGallery = () => {
     setImage(JSON.parse(img))
     
   }, []);
-  console.log(imagegal)
   return (
     <>
       <div
@@ -27,7 +26,8 @@ const ImageGallery = () => {
         >
          Hospital Images<span className="text-secondary">.</span>
         </h1>
-
+        {imagegal.length === 0 && <p className="text-black font-md text-sm md:text-1xl
+      text-center font-poppins"   >No Images to show</p>}
         {!imagegal ? (
           <div>
             <h1>Loading...</h1>

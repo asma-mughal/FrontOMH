@@ -14,6 +14,9 @@ import CardDoctor from './pages/CardDoctor';
 import DeveloperPage from './pages/DeveloperPage';
 import ImageGallery from './pages/ImageGallery';
 import ImageDocGallery from './pages/ImageDocGallery';
+import Description from './pages/Admin/pages/Description';
+import Experience from './pages/Admin/pages/Experience';
+import Certificate from './pages/Admin/pages/Certificate';
 function App() {
   const [dot, setDot] = useState(false);
   const [doc, setDoc] = useState('');
@@ -51,7 +54,10 @@ function App() {
   setDot={setDot} />}
  />
  <Route path="/developer" element={<DeveloperPage />} />
+ <Route path="/description" element={<Description />} />
  <Route path="/docGallery" element={<ImageDocGallery />} />
+ <Route path='/expDoc' element={<Experience />} />
+ <Route path='/certiDoc' element={<Certificate />} />
  </Routes>
  </Suspense>
  </AuthState>

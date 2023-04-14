@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
 import "./Sidebar.css";
 import { useTranslation } from 'react-i18next';
-import { Logo1 } from '../../../assets';
+import Logo1 from '../../../assets/OMIGAHEALTH LOGO PNG-13.png';
 import { SidebarData } from "../../../constants/index";
 import { UilBars } from "@iconscout/react-unicons";
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 
 const Sidebar = ({showHospital, setShowHospital,showTable, setShowTable,
-  showDashboard, setDashboard}) => {
+  showDashboard, setDashboard, showOption,setShowOption}) => {
     const [selected, setSelected] = useState(0);
 
     const [expanded, setExpaned] = useState(true)
@@ -48,20 +48,32 @@ const Sidebar = ({showHospital, setShowHospital,showTable, setShowTable,
             key={index}
 
             onClick={() => {setSelected(index)
-            if(item.heading=="Hospitals"){
+            if(item.heading==="Hospitals")
+            {
+              
               setDashboard(false)
               setShowHospital(true)
               setShowTable(false)
+              setShowOption(false)
             }
-            else if(item.heading=="Dashboard"){
+            else if(item.heading==="Dashboard"){
               setDashboard(true)
               setShowHospital(false)
               setShowTable(false)
+             setShowOption(false)
             }
-            else if(item.heading=="Doctors"){
+            else if(item.heading==="Doctors"){
               setDashboard(false)
               setShowHospital(false)
               setShowTable(true)
+              setShowOption(false)
+             
+            }
+            else if(item.heading==="Links"){
+              setDashboard(false)
+              setShowHospital(false)
+              setShowTable(false)
+              setShowOption(true)
             }
             else if(item.heading=="Back"){
              navigate("/")

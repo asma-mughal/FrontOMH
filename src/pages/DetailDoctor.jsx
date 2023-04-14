@@ -25,30 +25,30 @@ const DetailDoctor = ({doc}) => {
   return (
    <>
         
-    <div class = "about-wrapper font-poppins">
-    <div class = "about-left">
-    <div class = {`about-left-content ${document.body.dir=="rtl" && 'lg:m-96 '} `}>
+    <div className = "about-wrapper font-poppins">
+    <div className = "about-left">
+    <div className = {`about-left-content ${document.body.dir=="rtl" && 'lg:m-96 '} `}>
     <div>
-    <div class = "shadow m-10">
-    <div class = "about-img">
+    <div className = "shadow m-10">
+    <div className = "about-img">
     <img src={`${url}/api/v1/doctor/getImage/${imagegal}`} alt = "about image" />
     </div>
     </div>
     <h2>Dr.</h2>
-    <h3>{singleDoc.name}</h3>
+    <h3>{singleDoc?.name}</h3>
     </div>
    
     </div>
     </div>
-    <div class = "about-right">
+    <div className = "about-right">
     <h1>{t("hi")}<span>{t("!")}</span></h1>
     <h2></h2>
-    <div class = "about-btns">
+    <div className = "about-btns">
    
     </div>
-    <div class = "about-para">
-    <p>I am someone who is qualified in {singleDoc.qualification} and treats people who are ill.
-    I have a experience of  {singleDoc.experiance} years. Feel free to text me.
+    <div className = "about-para overflow-auto w-full h-full">
+    <p className='overflow-auto'>I am someone who is qualified in {singleDoc?.qualification} and treats people who are ill.
+    I have a experience of  {singleDoc?.experiance} years. Feel free to text me.
     </p>
  
     </div>

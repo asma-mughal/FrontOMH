@@ -17,25 +17,25 @@ const Forms = () => {
                {t("Welcome to Dashboard!")}
              </h2>
              <p className='text-center'>{t("Add & View Information")}</p>
-             <div class="flex flex-col items-center justify-center  px-10 py-10
+             <div className="flex flex-col items-center justify-center  px-10 py-10
               text-gray-700 bg-transparent">
-<div class="flex flex-col items-center w-full max-w-screen-md p-6 pb-6 bg-white rounded-lg shadow-xl sm:p-8">
-  <h2 class="text-xl font-bold">{t("Number of Visits")} </h2>
-  <span class="text-sm font-semibold text-gray-500">2022</span>
-  <div class="flex items-end flex-grow w-full mt-2 space-x-2 sm:space-x-3">
-    <div class="relative flex flex-col items-center flex-grow pb-5 group">
-      <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">$37,500</span>
-      <div class="relative flex justify-center w-full h-8 bg-sky-200"></div>
-      <div class="relative flex justify-center w-full h-6 bg-sky-300"></div>
-      <div class="relative flex justify-center w-full h-16 bg-sky-400"></div>
-      <span class="absolute bottom-0 text-xs font-bold">{t("Jan")}</span>
+<div className="flex flex-col items-center w-full max-w-screen-md p-6 pb-6 bg-white rounded-lg shadow-xl sm:p-8">
+  <h2 className="text-xl font-bold">{t("Number of Visits")} </h2>
+  <span className="text-sm font-semibold text-gray-500">2022</span>
+  <div className="flex items-end flex-grow w-full mt-2 space-x-2 sm:space-x-3">
+    <div className="relative flex flex-col items-center flex-grow pb-5 group">
+      <span className="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">$37,500</span>
+      <div className="relative flex justify-center w-full h-8 bg-sky-200"></div>
+      <div className="relative flex justify-center w-full h-6 bg-sky-300"></div>
+      <div className="relative flex justify-center w-full h-16 bg-sky-400"></div>
+      <span className="absolute bottom-0 text-xs font-bold">{t("Jan")}</span>
     </div>
-    <div class="relative flex flex-col items-center flex-grow pb-5 group">
-      <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">$45,000</span>
-      <div class="relative flex justify-center w-full h-10 bg-sky-200"></div>
-      <div class="relative flex justify-center w-full h-6 bg-sky-300"></div>
-      <div class="relative flex justify-center w-full h-20 bg-sky-400"></div>
-      <span class="absolute bottom-0 text-xs font-bold">{t("Feb")}</span>
+    <div className="relative flex flex-col items-center flex-grow pb-5 group">
+      <span className="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">$45,000</span>
+      <div className="relative flex justify-center w-full h-10 bg-sky-200"></div>
+      <div className="relative flex justify-center w-full h-6 bg-sky-300"></div>
+      <div className="relative flex justify-center w-full h-20 bg-sky-400"></div>
+      <span className="absolute bottom-0 text-xs font-bold">{t("Feb")}</span>
     </div>
     <div class="relative flex flex-col items-center flex-grow pb-5 group">
       <span class="absolute top-0 hidden -mt-6 text-xs font-bold group-hover:block">$47,500</span>

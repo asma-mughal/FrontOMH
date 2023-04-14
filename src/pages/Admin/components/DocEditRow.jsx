@@ -12,7 +12,7 @@ const DocEditRow = ({
   }) => {
     const {t, i18n} = useTranslation(['ABOUT']);
   return (
-   <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+   <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
     <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap
      dark:text-white text-center">
     {item._id}
@@ -54,12 +54,12 @@ const DocEditRow = ({
         />
     </td>
    
-    <td class="text-sm text-gray-900 font-light px-3 py-4 items-center justify-center whitespace-nowrap">
-    <div class="w-full ">
-        <div class="">
-        <div class="flex items-center justify-center w-full">
+    <td className="text-sm text-gray-900 font-light px-3 py-4 items-center justify-center whitespace-nowrap">
+    <div className="w-full ">
+        <div className="">
+        <div className="flex items-center justify-center w-full">
                 <label
-                    class="flex flex-col w-20  mt-2 m-1  h-20 border-2 border-secondary border-dashed
+                    className="flex flex-col w-20  mt-2 m-1  h-20 border-2 border-secondary border-dashed
                      hover:bg-gray-100 hover:border-gray-300">
                     <div class="flex flex-col items-center justify-center pt-7">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 group-hover:text-gray-600"
@@ -68,7 +68,7 @@ const DocEditRow = ({
                                 d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                         </svg>
                     </div>
-                    <input type="file" class="opacity-0"
+                    <input type="file" className="opacity-0"
                     onChange={uploadImage}
                     multiple
                     name="image"
@@ -82,7 +82,7 @@ const DocEditRow = ({
     </div>
     </td>
    
-    <td class="text-sm text-gray-900 font-light px-3 flex flex-col items-center justify-center py-4 whitespace-nowrap">
+    <td className="text-sm text-gray-900 font-light px-3 flex flex-col items-center justify-center py-4 whitespace-nowrap">
     <button
           type="submit"
         

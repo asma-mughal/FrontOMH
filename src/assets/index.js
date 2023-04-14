@@ -1,5 +1,5 @@
 import back from './arrow.png';
-import Logo1 from './OMIGAHEALTH LOGO PNG-13.png';
+import Logo1 from '../../public/OMIGAHEALTH LOGO PNG-15.png';
 import Logo2 from './OMIGAHEALTH LOGO PNG-15.png';
 import Logo3 from './OMIGAHEALTH LOGO PNG-16.png';
 import hero from './home-img.svg';
@@ -46,10 +46,12 @@ import linkedin from './linkedin.png';
 import gith from './github.png';
 import Mail from './mail.png';
 import mainLogo from './mainNavbar.png';
+import mainLogo2 from './OMIGAHEALTH LOGO PNG-13.png';
 import avatar1 from './logoTets.jpeg';
-export {Logo1, Logo2, Logo3,hero, service1, service2, service3, service4, heart, 
+import whatsappDp from './dp.jpeg';
+export { Logo2, Logo3,hero, service1, service2, service3, service4, heart, 
     FooterLogo, lang, arabic, english, contact, aboutImg, whatsapp,
 frank1, frank2, frank3, frank4, heid1, heid2, heid3, heid4, karl1, karl2, karl3, karl4, karl5,
 wurzs1, wurzs2,wurzs3,avatar, surgoen,dept, PM, MS, Girl, fb, google, acc, linkedin, gith, Mail,
-back, mainLogo, avatar1
+back, mainLogo, avatar1, Logo1,mainLogo2,whatsappDp
 }

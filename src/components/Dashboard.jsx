@@ -8,11 +8,11 @@ import { useNavigate  } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 import LoadingIcons from 'react-loading-icons'
 import { FloatingWhatsApp } from 'react-floating-whatsapp'
-import { avatar1, Logo1, PM } from '../assets';
+import { avatar1, Logo1, PM, whatsappDp } from '../assets';
 const Dashboard = ({dot, setDot,setDoc, doc}) => {
   const {t} = useTranslation(['ABOUT']);
   const navigate = useNavigate();
-  const {loadHospital, tryData} = useContext(AuthContext)
+  const {loadHospital, tryData, linksData} = useContext(AuthContext)
   const [show, setShow] = useState(false);
   React.useEffect(()=>{
    loadHospital()
@@ -20,15 +20,17 @@ const Dashboard = ({dot, setDot,setDoc, doc}) => {
       setShow(true)
     },[6000])
   },[])
+const numberString =`+${linksData?.number}`
 
   return (
     <>
     <div className='bg-sky-50 '>
     <FloatingWhatsApp 
-          phoneNumber='+4917661843993'
+          //phoneNumber='+4915678570444'
+          phoneNumber={numberString}
           chatMessage={`Help Needed?`}
           accountName='OmigaHealth'
-          avatar={avatar1}
+          avatar={whatsappDp}
           />
         <Navbar dot={dot} setDot={setDot} />
         <div className=' bg-sky-50'>
@@ -62,7 +64,7 @@ style={{
   width:'100%'
 }}
 />}
-    <div className='text-center m-2'>  <h5 class=" font-poppins text-sm
+    <div className='text-center m-2'>  <h5 className=" font-poppins text-sm
      tracking-tight mb-2
             dark:text-white p-5 underline font-bold text-black hover:text-secondary"
             onClick={()=>navigate('/detail')}

@@ -2,7 +2,7 @@ import React from "react";
 import AuthContext from "./AuthContext";
 import axios from "axios";
 import { useState } from "react";
-export const url = "https://www.omigahealth.com";
+export const url = "https://omigahealth.omigahealth.com";
 //export const url = "http://127.0.0.1:2300";
 const AuthState = (props) => {
   const [hospitalData, setHospData] = useState();
@@ -20,47 +20,59 @@ const AuthState = (props) => {
   const [imageSaveHosp, setImageSave] = useState();
   const [tryData, setTryData] = useState();
   const [tryDocData, setTryDocData] = useState();
+  const [linksData, setLinksData] =useState([])
   const [DocImage, setSelectedDocImage] = useState(false);
   const [hospEditImage, setHospEditImg] = useState(false);
-  
-  function addHospital(id, fullName, address, image) {
+  const [showForm , setShowForm] = useState(false)
+  const [deptName,setDeptName] = useState(null);
+  const [hospName, setHospName] = useState(null);
+  function addHospital(fullName,description1) {
     const formData = new FormData();
     formData.append("name", fullName);
     selectedImages.forEach(function (value) {
       formData.append("picture", value); // you have to add array symbol after the key name
     });
-   
-    axios.post(`${url}/api/v1/hospital/`, formData).then((res) => {
-      console.log(res.data.data);
-      alert("Hospital added");
-      setHospData(res.data.data.data);
-      loadHospital()
-      setSelectedImages([]);
-    });
-      //   fetch(`${url}/api/v1/hospital/`, {
-      //      method: 'POST',
-      //      headers: {
-      //          'Accept': 'application/json',
-      //          'Content-Type': 'application/json',
-      //      },
-      //      body: JSON.stringify({
-      //       name:fullName,
-      //       picture:selectedImages,
-      //      })
-      //  })
-      //      .then((response) => response.json())
-      //      .then((responseData) => {
-      //          console.log(
-      //              "POST Response",
-      //              "Response Body -> " + JSON.stringify(responseData) +
-      //              alert("Congratulations! Hospital is registered") +
-      //               setHospData(responseData.data.data) + setSelectedImages([])
-      //          )
-      //      })
-      //      .catch(error => console.log(error.toString() + alert("Oops!some error occured")))
+    formData.append("description", description1)
+     try{
+      axios.post(`${url}/api/v1/hospital/`, formData).then((res) => {
+
+        alert("Hospital added");
+        setHospData(res.data.data.data);
+        loadHospital()
+        setSelectedImages([]);
+      });
+     }catch(error) {
+      console.log(error.toString())
+     }
+    // fetch(`${url}/api/v1/hospital/`, {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     name: fullName,
+    //     //picture :[""],
+    //     description: description1,
+    //   }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((responseData) => {
+    //     console.log(
+    //       "POST Response",
+    //       "Response Body -> " +
+    //         JSON.stringify(responseData) +
+    //         "Hospital registered" +
+    //         alert("Hospital Added!") +
+    //         setSelectedImages([])
+    //     );
+    //   })
+    //   .catch((error) =>
+    //     console.log(error.toString() + alert("Oops! Some error occured"))
+    //   );
     //addDepartment(hospitalData._id,address)
   }
-  function addDepartment(address, id) {
+  function addDepartment(address, id, desc) {
     let entries = Object.entries(address);
     let data = entries.map(([key, val] = entry) => {
       return `${val}`;
@@ -76,6 +88,7 @@ const AuthState = (props) => {
       body: JSON.stringify({
         name: data[0],
         hospital: id,
+        description:desc
       }),
     })
       .then((response) => response.json())
@@ -83,7 +96,7 @@ const AuthState = (props) => {
         console.log(
           "POST Response",
           "Response Body -> " +
-            JSON.stringify(responseData) +
+            // JSON.stringify(responseData) +
             "department registered" +
             alert("Department Added!") +
             setSelectedImages([])
@@ -96,42 +109,25 @@ const AuthState = (props) => {
   function addImage(dataEdit, image) {
     const Id = dataEdit.id;
     const formData = new FormData();
-    console.log(image);
     formData.append("picture", image);
     axios
       .patch(`${url}/api/v1/hospital/imageUpload/${Id}`, formData)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setImageSave(res.data.data);
         //alert("Hospital Edited")
       });
   }
   function editHospImage(id, image) {
-   console.log(id, image)
     const formData = new FormData()
     formData.append("picture", image);
     axios.patch(`${url}/api/v1/hospital/uploadImage/${id}`, formData).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
     });
   }
   function editHospital(dataEdit, img) {
     const Id = dataEdit.id;
-    console.log(img)
-    //console.log(img.push(imageSaveHosp?.picture.toString()))
     img && editHospImage(Id,img)
-    // addImage(Id)
-    //console.log(dataEdit.image)
-    
-    // const formData = new FormData()
-    // formData.append('name', dataEdit.name)
-    //   axios.patch(`${url}/api/v1/hospital/${Id}`,formData).then((res)=>{
-    //       console.log(res.data.data)
-    //       alert("Hospital Edited")
-    //   })
-    //  console.log(dataEdit)
-    //  const Id = dataEdit.id;
-    //  console.log(img)
-    //http://localhost:2300/api/v1/hospital/${Id}
     fetch(`${url}/api/v1/hospital/${Id}`, {
       method: "PATCH",
       headers: {
@@ -140,6 +136,7 @@ const AuthState = (props) => {
       },
       body: JSON.stringify({
         name: dataEdit.name,
+        description: dataEdit.description
       }),
     })
       .then((response) => response.json())
@@ -147,7 +144,7 @@ const AuthState = (props) => {
         console.log(
           "PUT Response",
           "Response Body -> " +
-            JSON.stringify(responseData) +
+            // JSON.stringify(responseData) +
             "Hospital Updated" +
             alert("Hospital Updated! Refresh to see change") +
             setSelectedImages([])
@@ -166,7 +163,15 @@ const AuthState = (props) => {
         //console.log(oneHospital.data)
         setHosp(oneHospital.data);
         localStorage.setItem("HospDataOne", JSON.stringify(oneHospital));
-        console.log(oneHospital.data);
+        // console.log(oneHospital.data);
+      })
+      .catch((error) => console.log(`Error: ${error}`));
+  }
+  function getLinks() {
+    axios
+      .get(`${url}/api/v1/user/642ae5a3ccfc2ce328c6b0c8`)
+      .then((response) => {
+        setLinksData(response.data.data.user)
       })
       .catch((error) => console.log(`Error: ${error}`));
   }
@@ -176,13 +181,12 @@ const AuthState = (props) => {
       .get(`${url}/api/v1/dep/${id}`)
       .then((response) => {
         const oneHospital = response.data;
-        console.log(oneHospital.data.doctor);
+        // console.log(oneHospital.data.doctor);
         localStorage.setItem("DocDataUnique", JSON.stringify(oneHospital));
       })
       .catch((error) => console.log(`Error: ${error}`));
   }
   function getOneDoctor(id) {
-    //console.log(id)
     axios
       .get(`${url}/api/v1/doctor/${id}`)
       .then((response) => {
@@ -193,7 +197,6 @@ const AuthState = (props) => {
       .catch((error) => console.log(`Error: ${error}`));
   }
   function deleteHospital(id) {
-    console.log("deleted");
     fetch(`${url}/api/v1/hospital/${id}`, {
       method: "DELETE",
       headers: {
@@ -206,7 +209,7 @@ const AuthState = (props) => {
         console.log(
           "DELETE Response",
           "Response Body -> " +
-            JSON.stringify(responseData) +
+            // JSON.stringify(responseData) +
             console.log(responseData) +
             alert("Congratulations! Hospital Deleted, Refresh to see results") +
             loadHospital()
@@ -214,16 +217,6 @@ const AuthState = (props) => {
       })
       .catch((error) => console.log(error.toString()));
   }
-  // const retrieveHospital = async() => {
-  //   axios
-  //     .get(`${url}/api/v1/hospital/`)
-  //     .then((response) => {
-  //       const allHospital = response.data;
-  //       console.log(allHospital.data);
-  //       localStorage.setItem("HospData", JSON.stringify(allHospital));
-  //     })
-  //     .catch((error) => console.log(`Error: ${error}`));
-  // };
 
   function addDoctor(
     id,
@@ -243,10 +236,13 @@ const AuthState = (props) => {
     formData.append("hospital", hospital);
     formData.append("department", dept);
     axios.post(`${url}/api/v1/doctor/`, formData).then((res) => {
-      console.log(res.data.data);
+      // console.log(res.data.data);
       setDoctorData(res.data.data);
       alert('Doctor Added')
       loadDoctor()
+      setDocDeptAdded(false)
+      setDeptName(null)
+      setHospName(null)
     });
     // //${url}/api/v1/doctor/
     // fetch(`${url}/api/v1/doctor/`, {
@@ -280,11 +276,10 @@ const AuthState = (props) => {
     const formData = new FormData()
     formData.append("picture", image);
     axios.patch(`${url}/api/v1/doctor/imageUpload/${id}`, formData).then((res) => {
-      console.log(res?.data?.data);
+      // console.log(res?.data?.data);
     });
   }
   function editDoctor(id, fullName, certificate, experience, image) {
-    console.log(id, fullName, certificate, experience, image);
     console.log("image not selected");
     // const formData = new FormData()
     // formData.append('name', fullName)
@@ -316,7 +311,7 @@ const AuthState = (props) => {
         console.log(
           "PUT Response",
           "Response Body -> " +
-            JSON.stringify(responseData) +
+            // JSON.stringify(responseData) +
             "Doctor Updated" +
             alert("Doctor Updated! Refresh to see change")
         );
@@ -325,8 +320,37 @@ const AuthState = (props) => {
         console.log(error.toString() + alert("Oops! Some error occured"))
       );
   }
+  function editLinks(contact) {
+    fetch(`${url}/api/v1/user/642ae5a3ccfc2ce328c6b0c8`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        number: contact.number,
+        instagram: contact.instagram ,
+        facebook: contact.facebook,
+        twitter:contact.twitter,
+        hospitalEmail:contact.email,
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        console.log(
+          "PUT Response",
+          "Response Body -> " +
+            // JSON.stringify(responseData) +
+            "Links Updated" +
+            alert("Links Updated! Refresh to see change") + setShowForm(false) + getLinks()
+        );
+      })
+      .catch((error) =>
+        console.log(error.toString() + alert("Oops! Some error occured"))
+      );
+  }
   function deleteDoctor(id) {
-    console.log(id);
+    // console.log(id);
     fetch(`${url}/api/v1/doctor/${id}`, {
       method: "DELETE",
       headers: {
@@ -339,7 +363,7 @@ const AuthState = (props) => {
         console.log(
           "POST Response",
           "Response Body -> " +
-            JSON.stringify(responseData) +
+            // JSON.stringify(responseData) +
             alert(
               "Congratulations! Doctor is Deleted, Refresh to see results"
             ) +
@@ -353,7 +377,7 @@ const AuthState = (props) => {
   const loadDoctor = async() =>{
     const response = await axios.get(`${url}/api/v1/doctor/`);
     setTryDocData(response?.data?.data?.doctors)
-    console.log(response?.data?.data?.doctors)
+    //console.log(response?.data?.data?.doctors)
   }
   function retrieveDoctor() {
     
@@ -383,7 +407,7 @@ const AuthState = (props) => {
         console.log(
           "POST Response",
           "Response Body -> " +
-            JSON.stringify(responseData) +
+            // JSON.stringify(responseData) +
             alert("Congratulations! User is LoggedIn") +
             setToken(responseData.token) +
             localStorage.setItem("Token", responseData.token)
@@ -394,7 +418,7 @@ const AuthState = (props) => {
   const loadHospital = async() =>{
     const response = await axios.get(`${url}/api/v1/hospital/`);
     setTryData(response.data.data)
-    console.log(response.data.data)
+    //console.log(response.data.data)
   }
   function passChange(oldPass, newPass) {
     console.log(oldPass, newPass);
@@ -459,7 +483,14 @@ const AuthState = (props) => {
     DocImage,
     setSelectedDocImage,
     hospEditImage, 
-    setHospEditImg
+    setHospEditImg,
+    editLinks,
+    getLinks,
+    linksData,
+    showForm,
+    setShowForm,
+    deptName,setDeptName,
+    hospName, setHospName
   };
   return (
     <AuthContext.Provider value={state}>{props.children}</AuthContext.Provider>

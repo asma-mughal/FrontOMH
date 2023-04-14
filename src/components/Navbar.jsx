@@ -7,10 +7,10 @@ import { MenuIcon, XIcon, ChevronDownIcon } from '@heroicons/react/outline';
 import { Menu, Transition } from '@headlessui/react';
 import { useNavigate  } from 'react-router-dom';
 import { lang, arabic,english } from '../assets/index';
-const Navbar = ({setDot, dot}) => {
+const Navbar = () => {
     const [nav, setNav] = useState(false)
     const handleClick = () => setNav(!nav)
-    const handleClose =()=> setNav(!nav)
+
     const {t, i18n} = useTranslation(['ABOUT']);
     useEffect(() => {
       if (localStorage.getItem("i18nextLng")?.length > 2) {
@@ -23,14 +23,10 @@ const Navbar = ({setDot, dot}) => {
   
     const handleLanguageChange = (e) => {
      if(e=="es"){
-      document.body.dir = 'rtl';
-      setDot(true);
-      console.log(dot);
+
      }
      if(e=="en") {
-      document.body.dir = 'ltr';
-      setDot(false);
-      console.log(dot)
+      
      }
 
       i18n.changeLanguage(e);
@@ -43,7 +39,10 @@ const Navbar = ({setDot, dot}) => {
     <div className='w-screen h-[80px] z-10 bg-sky-50 fixed drop-shadow-lg font-poppins'>
     <div className='flex justify-between items-center w-full h-full'>
       <div className='flex items-center'>
-      <img src={mainLogo} className="pt-3 lg:w-96 lg:h-52 xl:w-96 xl:h-52"  />
+      <img src={mainLogo} className="pt-3
+      object-fit
+      lg:w-48 lg:h-48 xl:w-96 xl:h-52
+      "  />
         <ul className='hidden md:flex text-xs  font-bold uppercase'
         
         >

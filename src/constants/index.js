@@ -5,7 +5,8 @@ import {  frank1, frank2, frank3, frank4, heid1, heid2, heid3, heid4, karl1,
     UilUser,
     UilHospital,
     UilEstate,
-  UilBackward
+  UilBackward,
+  UilLink
   } from "@iconscout/react-unicons";
  
 export const navLinks = [
@@ -172,6 +173,10 @@ export const SidebarData = [
     heading: "Doctors",
   },
   {
+    icon:UilLink,
+    heading:"Links"
+  },
+  {
     icon:UilBackward,
     heading:"Back"
   }
@@ -198,6 +203,42 @@ export const docInfo =[
   },
 ]
 
-
+export const optionList = [
+  { value: "Adult and Pediatric Oral, Maxillofacial Surgery, Facial Plastic Surgery", label: "Adult and Pediatric Oral, Maxillofacial Surgery, Facial Plastic Surgery" },
+  { value: "Maxillofacial Surgery", label: "Maxillofacial Surgery" },
+  { value: "Facial Plastic Surgery", label: "Facial Plastic Surgery" },
+  { value: "General, Abdominal, Transplant, Vascular and Pediatric", label: "General, Abdominal, Transplant, Vascular and Pediatric" },
+  { value: "General, Abdominal, Transplant Surgery", label: "General, Abdominal, Transplant Surgery" },
+  { value: "Abdominal Surgery", label: "Abdominal Surgery" },
+  { value: "Vascular and EndoVascular Surgery", label: "Vascular and EndoVascular Surgery" },
+  { value: "Operating theatre (OT)", label: "Operating theatre (OT)" },
+  { value: "Intensive care unit (ICU)", label: "Intensive care unit (ICU)" },
+  { value: "Anesthesiology ", label: "Anesthesiology " },
+  { value: "ENT ", label: "ENT " },
+  { value: "Geriatric ", label: "Geriatric " },
+  { value: "Gastroenterology ", label: "Gastroenterology " },
+  { value: "Haematology", label: "Haematology" },
+  { value: "Adult and Pediatric Ophthalmology", label: "Adult and Pediatric Ophthalmology" },
+  { value: "Pediatric Haematology", label: "Pediatric Haematology" },
+  { value: "Pediatric Surgery", label: "Pediatric Surgery" },
+  { value: "Pediatric Allergology and Pulmonology", label: "Pediatric Allergology and Pulmonology" },
+  { value: "Pediatric", label: "Pediatric" },
+  { value: "Traumatology, Hand Surgery, Plastic and Reconstructive", label: "Traumatology, Hand Surgery, Plastic and Reconstructive" },
+  { value: "Pulmonology", label: "Pulmonology" },
+  { value: "Pediatric Cardiology ", label: "Pediatric Cardiology" },
+  { value: "Pediatric Oncology and Hematology ", label: "Pediatric Oncology and Hematology" },
+  { value: "Neurology", label: "Neurology" },
+  { value: "Oncology", label: "Oncology" },
+  { value: "Orthopaedic", label: "Orthopaedic" },
+  { value: "Urology", label: "Urology" },
+  { value: "Inpatient ", label: "Inpatient " },
+  { value: "Pharmacy", label: "Pharmacy" },
+  { value: "Radiology", label: "Radiology" },
+  { value: "Clinical pathology", label: "Clinical pathology" },
+  { value: "Nutrition and dietetics", label: "Nutrition and dietetics" },
+  { value: "Catering and food services", label: "Catering and food services" },
+  { value: "Central sterilization unit", label: "Central sterilization unit" },
+  { value: "Housekeeping", label: "Housekeeping" },
+];
 
 const link = "https://wa.me/1XXXXXXXXXX"; 

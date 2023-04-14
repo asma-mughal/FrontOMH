@@ -27,7 +27,12 @@ const SliderTemperory = ({icon}) =>{
     >
     {icon?.map((i)=>{
 
-      return ( <img src={`${url}/api/v1/hospital/getImage/${i}`} 
+      return (
+         <img
+        key={i._id}
+        src={`${url}/api/v1/hospital/getImage/${i}`
+
+    } 
       alt="hospital" className='w-20 h-36 lg:h-52 lg:w-96' />)
     })}
 
@@ -81,7 +86,7 @@ export const Card = ({ _id,icon, name, bg,t, setDoc, picture}) =>{
        className='bg-sky-50 border-0 border-transparent cursor-pointer'
        onClick={()=>handleHospital(_id)}
        >
-            <h5 class=" font-poppins text-lg tracking-tight mb-2
+            <h5 className=" font-poppins text-lg tracking-tight mb-2
             cursor:pointer
             dark:text-white p-10 hover:underline uppercase text-secondary" >
               {t(name)}</h5>
@@ -121,7 +126,7 @@ export const CardDoc = ({ icon, title,index,name, href, bg, t, doc,departments }
     <button 
        className='bg-transparent border-0 border-transparent cursor-pointer'
        onClick={()=>navigate(href)}>
-            <h5 class="text-gray-900 font-poppins text-lg tracking-tight mb-2
+            <h5 className="text-gray-900 font-poppins text-lg tracking-tight mb-2
             cursor:pointe
             dark:text-white p-10 hover:underline hover:text-secondary" >
               {t(name)}</h5>

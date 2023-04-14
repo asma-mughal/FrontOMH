@@ -9,6 +9,7 @@ import LoadingIcons from 'react-loading-icons'
 const Departments = ({doc,setDoc, dot, setDot}) => {
     const {t} = useTranslation(['ABOUT']);
     const [loading,setLoading] = useState(false);
+    const [deptInfo, setdeptInfo] = useState('');
     const navigate= useNavigate();
     const { getOneHospital,getOneDept, deptArray, setDeptarray, setDoctorArray
     } = useContext(AuthContext)
@@ -21,12 +22,13 @@ const Departments = ({doc,setDoc, dot, setDot}) => {
       const x = localStorage.getItem(("HospDataOne"));
       const res = (JSON.parse(x))
        loopData = (res?.data?.dep)
+       setdeptInfo(res?.data?.hospital.description)
       setDeptarray(loopData)
       setTimeout(()=>{
       setLoading(true)  
       },[3000])
     },[])
-   
+
     
    const handleDoctors = (i) =>{
     setLoadingDoc(false)
@@ -40,16 +42,6 @@ const Departments = ({doc,setDoc, dot, setDot}) => {
       navigate("/cardDoc")
       },[3000])
    }
-
-   function DoctorOperations(){
-    const x = localStorage.getItem(("DocDataUnique"));
-    const res = (JSON.parse(x))
-    const loopData = (res?.data?.doctor)
-    setDoctorArray(loopData)
-    setTimeout(()=>{
-    //navigate("/cardDoc")
-    },[3000])
-   }
   return (
     <div className='bg-sky-50 h-screen' id="doc" name="doc">
     <Navbar dot={dot} setDot={setDot}/>
@@ -59,6 +51,11 @@ const Departments = ({doc,setDoc, dot, setDot}) => {
        {t("For Yourself")}
       
       </h4>
+      <h5 className={`${styles.paragraph} px-5`}>
+       {t("Description of the Hospital")} <br className="sm:block hidden " /> 
+      </h5>
+      <p className='font-poppins text-sm capitalize m-5
+    '>{deptInfo ? deptInfo : "No description Available"}</p>
       <div className='flex  bg-sky-50 flex-row place-content-center items-center justify-center'>
       {!loading && <LoadingIcons.Puff stroke="#44C0BC" strokeOpacity={.125} speed={.75} 
 style={{
@@ -84,18 +81,19 @@ style={{
                     
                     alt="dept" />
                       <button 
-       className={`w-72 px-3 bg-sky-50 md:px-9 xl:px-3 lg:px-3 mb-2 cursor-pointer
+       className={`w-72  px-5 bg-sky-50 md:px-9 xl:px-3 lg:px-3 mb-2 cursor-pointer
          ${document.body.dir ==="ltr" ? 
     'text-left' :'text-right'
     } h-10 text-left bg-sky-50 rounded-none border-transparent`}
        >
-            <h5 class="text-black font-poppins font-bold text-base  tracking-tight 
+            <h5 className="text-black font-poppins font-bold text-base  tracking-tight 
             
             dark:text-white hover:text-secondary" >
              {i.name}</h5>
               </button>
               <div className=' bg-sky-50'>
-              <button  class="bg-secondary
+              <button  className="bg-secondary
+              mt-5
                border-secondary w-36 h-10
              mx-2  md:mx-9 lg:mx-2 xl:mx-2 my-2 font-poppins rounded border p-2
                    text-white transition hover:bg-opacity-90 hover:text-black"
